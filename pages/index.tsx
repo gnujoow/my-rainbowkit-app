@@ -2,8 +2,12 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import { ConnectKitButton } from "connectkit";
+import { useWeb3Modal, Web3Button } from "@web3modal/react";
 
 const Home: NextPage = () => {
+  const { open } = useWeb3Modal();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,12 +20,38 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <ConnectButton />
+        <h1>raindow-kit</h1>
+        <div>
 
-        <h1 className={styles.title}>
-          Welcome to <a href="">RainbowKit</a> + <a href="">wagmi</a> +{" "}
-          <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <ConnectButton />
+        <ConnectButton showBalance={false} />
+        </div>
+        <h1>connect-kit</h1>
+        <div>
+          <ConnectKitButton mode="dark" />
+          <ConnectKitButton mode="light" />
+          <p>themes</p>
+          <ConnectKitButton showAvatar showBalance theme="web95" />
+          <ConnectKitButton showAvatar showBalance theme="retro" />
+          <ConnectKitButton showAvatar showBalance theme="soft" />
+          <ConnectKitButton showAvatar showBalance theme="midnight" />
+          <ConnectKitButton showAvatar showBalance theme="minimal" />
+          <ConnectKitButton showAvatar showBalance theme="rounded" />
+          <ConnectKitButton showAvatar showBalance theme="nouns" />
+        </div>
+        <h1>wallet connect / web3modal</h1>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <button onClick={() => open()}>
+            or this button can be fully customized
+          </button>{" "}
+          <Web3Button />
+          <Web3Button balance="show" icon="show" />
+        </div>
       </main>
     </div>
   );
